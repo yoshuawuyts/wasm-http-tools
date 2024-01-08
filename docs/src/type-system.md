@@ -19,6 +19,8 @@ Definitions are for [OpenAPI v3.1.0](https://spec.openapis.org/oas/latest.html):
 
 ## Discussion
 
+### `number`
+
 The base `number` type without any qualifier here is mapped to `float64`. The
 JSON Schema specification mentions it should actually be:
 
@@ -32,13 +34,17 @@ WIT does not (yet?) support arbitrary-precision floating point numbers, so in
 the absence of any constraining information we should just pick the biggest
 number we can support.
 
+### `null`
+
 WIT also has no notion of `null` in the type system; instead it uses the
 `option` type to indicate a value may or may not be present. A field which can
 only ever be `null` should be rejected in any encoding - in Rust terms we'd want
 to translate that to a type of `Option<!>` (only `None` can be constructed) - or
 `Option<Unreachable>` (an empty enum akin to `!`). But in WIT we can't do either of these things, so a field that's hard-coded to only ever be `none` should be rejected to prevent any ambiguities in the encoding.
 
-Regarding password stings: for the sake of simplicity we should treat this as a
+### `password`
+
+Regarding password strings: for the sake of simplicity we should treat this as a
 regular string for the time being. However in the future we may want to define a
 generic type `sensitive<T>` which can hold strings whose contents are sensitive
 and should never be printed or displayed. This will require a non-trivial type
