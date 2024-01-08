@@ -3,6 +3,9 @@
 ## Routes
 
 ```wit
+func servers() -> list{
+
+}
 interface pets {
     record list-pets-input {
         limit: option<s32>
@@ -13,14 +16,14 @@ interface pets {
         x-next: string,
     }
 
-    fun list-pets(input: list-pets-input) -> result<list-pets-response, error>;
+    func list-pets(input: list-pets-input) -> result<list-pets-response, error>;
 
-    fun create-pets() -> result<_, error> {}
+    func create-pets() -> result<_, error> {}
 
     record show-pet-by-id-input {
         pet-id: string,
     }
-    fun show-pet-by-id(show-pet-by-id-input) -> result<pet, error> {}
+    func show-pet-by-id(show-pet-by-id-input) -> result<pet, error> {}
 }
 ```
 
