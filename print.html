@@ -383,7 +383,10 @@ codegen to work between the two.</p>
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="wit-definition"><a class="header" href="#wit-definition">WIT definition</a></h1>
 <h2 id="routes"><a class="header" href="#routes">Routes</a></h2>
-<pre><code class="language-wit">interface pets {
+<pre><code class="language-wit">func servers() -&gt; list{
+
+}
+interface pets {
     record list-pets-input {
         limit: option&lt;s32&gt;
     }
@@ -393,14 +396,14 @@ codegen to work between the two.</p>
         x-next: string,
     }
 
-    fun list-pets(input: list-pets-input) -&gt; result&lt;list-pets-response, error&gt;;
+    func list-pets(input: list-pets-input) -&gt; result&lt;list-pets-response, error&gt;;
 
-    fun create-pets() -&gt; result&lt;_, error&gt; {}
+    func create-pets() -&gt; result&lt;_, error&gt; {}
 
     record show-pet-by-id-input {
         pet-id: string,
     }
-    fun show-pet-by-id(show-pet-by-id-input) -&gt; result&lt;pet, error&gt; {}
+    func show-pet-by-id(show-pet-by-id-input) -&gt; result&lt;pet, error&gt; {}
 }
 </code></pre>
 <h2 id="schemas"><a class="header" href="#schemas">Schemas</a></h2>
