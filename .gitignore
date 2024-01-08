@@ -3,3 +3,4 @@ target/
 tmp/
 Cargo.lock
 .DS_Store
+generated/*

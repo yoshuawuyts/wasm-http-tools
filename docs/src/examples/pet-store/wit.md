@@ -1,37 +1,40 @@
 # WIT definition
-https://raw.githubusercontent.com/yoshuawuyts/openapi-bindgen/main/fixtures/petstore.json
-
-https://petstore3.swagger.io
 
 ## Routes
 
-```rust
-mod pets {
-    fn list_pets() {}
-    fn create_pets() {}
-    async fn show_pet_by_id(pet_id: String) {}
-}
-```
-
 ```wit
 interface pets {
-    fun list-pets(limit: option<s32>);
-    fun create-pets() {}
-    fun show-pet-by-id(pet_id: string) {}
+    record list-pets-input {
+        limit: option<s32>
+    }
+
+    record list-pets-response {
+        pet-array: list<pet>,
+        x-next: string,
+    }
+
+    fun list-pets(input: list-pets-input) -> result<list-pets-response, error>;
+
+    fun create-pets() -> result<_, error> {}
+
+    record show-pet-by-id-input {
+        pet-id: string,
+    }
+    fun show-pet-by-id(show-pet-by-id-input) -> result<pet, error> {}
 }
 ```
 
 ## Schemas
 ```wit
-record Pet {
+record pet {
     id: s64,
     name: string,
     tag: string,
 }
 
-type Pets = list<Pet>;
+type pets = list<pet>;
 
-record Error {
+record error {
     code: s32,
     message: string,
 }
