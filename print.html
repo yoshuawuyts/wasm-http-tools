@@ -382,33 +382,37 @@ codegen to work between the two.</p>
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="wit-definition"><a class="header" href="#wit-definition">WIT definition</a></h1>
-<p>https://raw.githubusercontent.com/yoshuawuyts/openapi-bindgen/main/fixtures/petstore.json</p>
-<p>https://petstore3.swagger.io</p>
 <h2 id="routes"><a class="header" href="#routes">Routes</a></h2>
-<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>mod pets {
-    fn list_pets() {}
-    fn create_pets() {}
-    async fn show_pet_by_id(pet_id: String) {}
-}
-<span class="boring">}</span></code></pre></pre>
 <pre><code class="language-wit">interface pets {
-    fun list-pets(limit: option&lt;s32&gt;);
-    fun create-pets() {}
-    fun show-pet-by-id(pet_id: string) {}
+    record list-pets-input {
+        limit: option&lt;s32&gt;
+    }
+
+    record list-pets-response {
+        pet-array: list&lt;pet&gt;,
+        x-next: string,
+    }
+
+    fun list-pets(input: list-pets-input) -&gt; result&lt;list-pets-response, error&gt;;
+
+    fun create-pets() -&gt; result&lt;_, error&gt; {}
+
+    record show-pet-by-id-input {
+        pet-id: string,
+    }
+    fun show-pet-by-id(show-pet-by-id-input) -&gt; result&lt;pet, error&gt; {}
 }
 </code></pre>
 <h2 id="schemas"><a class="header" href="#schemas">Schemas</a></h2>
-<pre><code class="language-wit">record Pet {
+<pre><code class="language-wit">record pet {
     id: s64,
     name: string,
     tag: string,
 }
 
-type Pets = list&lt;Pet&gt;;
+type pets = list&lt;pet&gt;;
 
-record Error {
+record error {
     code: s32,
     message: string,
 }
