@@ -164,6 +164,7 @@
 </tbody></table>
 </div>
 <h2 id="discussion"><a class="header" href="#discussion">Discussion</a></h2>
+<h3 id="number"><a class="header" href="#number"><code>number</code></a></h3>
 <p>The base <code>number</code> type without any qualifier here is mapped to <code>float64</code>. The
 JSON Schema specification mentions it should actually be:</p>
 <blockquote>
@@ -176,12 +177,14 @@ an
 WIT does not (yet?) support arbitrary-precision floating point numbers, so in
 the absence of any constraining information we should just pick the biggest
 number we can support.</p>
+<h3 id="null"><a class="header" href="#null"><code>null</code></a></h3>
 <p>WIT also has no notion of <code>null</code> in the type system; instead it uses the
 <code>option</code> type to indicate a value may or may not be present. A field which can
 only ever be <code>null</code> should be rejected in any encoding - in Rust terms we'd want
 to translate that to a type of <code>Option&lt;!&gt;</code> (only <code>None</code> can be constructed) - or
 <code>Option&lt;Unreachable&gt;</code> (an empty enum akin to <code>!</code>). But in WIT we can't do either of these things, so a field that's hard-coded to only ever be <code>none</code> should be rejected to prevent any ambiguities in the encoding.</p>
-<p>Regarding password stings: for the sake of simplicity we should treat this as a
+<h3 id="password"><a class="header" href="#password"><code>password</code></a></h3>
+<p>Regarding password strings: for the sake of simplicity we should treat this as a
 regular string for the time being. However in the future we may want to define a
 generic type <code>sensitive&lt;T&gt;</code> which can hold strings whose contents are sensitive
 and should never be printed or displayed. This will require a non-trivial type
