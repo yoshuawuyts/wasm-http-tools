@@ -15,7 +15,6 @@ Definitions are for [OpenAPI v3.1.0](https://spec.openapis.org/oas/latest.html):
 | `string`         | `password`              | `string`    |
 | `integer`        | `int32`                 | `s32`       |
 | `integer`        | `int64`                 | `s64`       |
-| `integer`        | `int64`                 | `s64`       |
 
 ## Discussion
 
