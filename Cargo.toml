@@ -1,0 +1,20 @@
+[package]
+name = "openapi-wit"
+version = "0.0.0"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/yoshuawuyts/openapi-wit"
+documentation = "https://docs.rs/openapi-wit"
+description = "Bidirectional bindings between OpenAPI (Swagger) and WIT"
+readme = "README.md"
+edition = "2018"
+keywords = []
+categories = []
+authors = [
+    "Yoshua Wuyts <rust@yosh.is>"
+]
+
+[features]
+
+[dependencies]
+
+[dev-dependencies]
