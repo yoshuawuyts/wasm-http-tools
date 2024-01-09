@@ -3,9 +3,6 @@
 ## Routes
 
 ```wit
-func servers() -> list{
-
-}
 interface pets {
     record list-pets-input {
         limit: option<s32>
