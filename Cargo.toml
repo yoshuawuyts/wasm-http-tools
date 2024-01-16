@@ -1,5 +1,6 @@
 [workspace]
 members = [
+    "crates/http-bindgen",
     "crates/openapi-bindgen",
     "crates/wit-bindgen-http",
 ]

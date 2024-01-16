@@ -1,0 +1,20 @@
+[package]
+name = "http-bindgen"
+version = "0.0.0"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/yoshuawuyts/openapi-wit"
+documentation = "https://docs.rs/wit-bindgen-http"
+description = "HTTP types generator"
+readme = "README.md"
+edition = "2021"
+keywords = []
+categories = []
+authors = [
+    "Yoshua Wuyts <rust@yosh.is>"
+]
+
+[features]
+
+[dependencies]
+
+[dev-dependencies]
