@@ -1,7 +1,7 @@
 <h1 align="center">wit-bindgen-http</h1>
 <div align="center">
   <strong>
-    Bidirectional bindings between OpenAPI (Swagger) and WIT
+    Automatically generate HTTP routing layers for WIT definitions
   </strong>
 </div>
 

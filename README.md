@@ -64,7 +64,7 @@ protocol to communicate between those types automatically.
 | --------------- | ---------------------------------------------- | ----------------------------------------------------------------- |
 | not yet started | [http-bindgen](./crates/http-bindgen/)         | Generate structured HTTP types from IETF specifications           |
 | in-progress     | [openapi-bindgen](./crates/openapi-bindgen/)   | Generate bidirectional bindings between OpenAPI (Swagger) and WIT |
-| not yet started | [wit-bindgen-http](./crates/wit-bindgen-http/) | Automatically route WIT imports/exports over HTTP                 |
+| not yet started | [wit-bindgen-http](./crates/wit-bindgen-http/) | Automatically generate HTTP routing layers for WIT definitions |
 | not yet started | [wasm-http-tools](./crates/wasm-http-tools/)   | Rust tooling to use Wasm Components over HTTP                     |
 
 ## Contributing
