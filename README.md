@@ -5,30 +5,10 @@
   </strong>
 </div>
 
-<br />
-
-<div align="center">
-  <!-- Crates version -->
-  <a href="https://crates.io/crates/wasm-http-tools">
-    <img src="https://img.shields.io/crates/v/wasm-http-tools.svg?style=flat-square"
-    alt="Crates.io version" />
-  </a>
-  <!-- Downloads -->
-  <a href="https://crates.io/crates/wasm-http-tools">
-    <img src="https://img.shields.io/crates/d/wasm-http-tools.svg?style=flat-square"
-      alt="Download" />
-  </a>
-  <!-- docs.rs docs -->
-  <a href="https://docs.rs/wasm-http-tools">
-    <img src="https://img.shields.io/badge/docs-latest-blue.svg?style=flat-square"
-      alt="docs.rs docs" />
-  </a>
-</div>
-
 <div align="center">
   <h3>
-    <a href="https://docs.rs/wasm-http-tools">
-      API Docs
+    <a href="https://yoshuawuyts.github.io/wasm-http-tools">
+      Documentation
     </a>
     <span> | </span>
     <a href="https://github.com/yoshuawuyts/wasm-http-tools/releases">
@@ -64,7 +44,7 @@ protocol to communicate between those types automatically.
 | --------------- | ---------------------------------------------- | ----------------------------------------------------------------- |
 | not yet started | [http-bindgen](./crates/http-bindgen/)         | Generate structured HTTP types from IETF specifications           |
 | in-progress     | [openapi-bindgen](./crates/openapi-bindgen/)   | Generate bidirectional bindings between OpenAPI (Swagger) and WIT |
-| not yet started | [wit-bindgen-http](./crates/wit-bindgen-http/) | Automatically generate HTTP routing layers for WIT definitions |
+| not yet started | [wit-bindgen-http](./crates/wit-bindgen-http/) | Automatically generate HTTP routing layers for WIT definitions    |
 | not yet started | [wasm-http-tools](./crates/wasm-http-tools/)   | Rust tooling to use Wasm Components over HTTP                     |
 
 ## Contributing
