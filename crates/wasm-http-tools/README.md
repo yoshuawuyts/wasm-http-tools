@@ -57,9 +57,9 @@ look at some of these issues:
 - [Issues labeled "good first issue"][good-first-issue]
 - [Issues labeled "help wanted"][help-wanted]
 
-[contributing]: https://github.com/yoshuawuyts/html/blob/master.github/CONTRIBUTING.md
-[good-first-issue]: https://github.com/yoshuawuyts/html/labels/good%20first%20issue
-[help-wanted]: https://github.com/yoshuawuyts/html/labels/help%20wanted
+[contributing]: https://github.com/yoshuawuyts/wasm-http-tools/blob/master.github/CONTRIBUTING.md
+[good-first-issue]: https://github.com/yoshuawuyts/wasm-http-tools/labels/good%20first%20issue
+[help-wanted]: https://github.com/yoshuawuyts/wasm-http-tools/labels/help%20wanted
 
 ## License
 

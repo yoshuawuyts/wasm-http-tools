@@ -2,7 +2,7 @@
 name = "http-bindgen"
 version = "0.0.0"
 license = "MIT OR Apache-2.0"
-repository = "https://github.com/yoshuawuyts/openapi-wit"
+repository = "https://github.com/yoshuawuyts/wasm-http-tools"
 documentation = "https://docs.rs/wit-bindgen-http"
 description = "HTTP types generator"
 readme = "README.md"
