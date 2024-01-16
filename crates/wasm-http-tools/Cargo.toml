@@ -1,0 +1,20 @@
+[package]
+name = "wasm-http-tools"
+version = "0.0.0"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/yoshuawuyts/openapi-wit"
+documentation = "https://docs.rs/wasm-http-tools"
+description = "Bidirectional bindings generator between OpenAPI (Swagger) and WIT"
+readme = "README.md"
+edition = "2021"
+keywords = []
+categories = []
+authors = [
+    "Yoshua Wuyts <rust@yosh.is>"
+]
+
+[features]
+
+[dependencies]
+
+[dev-dependencies]

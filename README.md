@@ -1,7 +1,7 @@
-<h1 align="center">openapi-wit</h1>
+<h1 align="center">wasm-http-tools</h1>
 <div align="center">
   <strong>
-    Rust tooling to use [Wasm Components](https://github.com/webassembly/component-model) over HTTP
+    Rust tooling to use <a href="https://github.com/webassembly/component-model">Wasm Components</a> over HTTP
   </strong>
 </div>
 
@@ -9,17 +9,17 @@
 
 <div align="center">
   <!-- Crates version -->
-  <a href="https://crates.io/crates/openapi-wit">
-    <img src="https://img.shields.io/crates/v/openapi-wit.svg?style=flat-square"
+  <a href="https://crates.io/crates/wasm-http-tools">
+    <img src="https://img.shields.io/crates/v/wasm-http-tools.svg?style=flat-square"
     alt="Crates.io version" />
   </a>
   <!-- Downloads -->
-  <a href="https://crates.io/crates/openapi-wit">
-    <img src="https://img.shields.io/crates/d/openapi-wit.svg?style=flat-square"
+  <a href="https://crates.io/crates/wasm-http-tools">
+    <img src="https://img.shields.io/crates/d/wasm-http-tools.svg?style=flat-square"
       alt="Download" />
   </a>
   <!-- docs.rs docs -->
-  <a href="https://docs.rs/openapi-wit">
+  <a href="https://docs.rs/wasm-http-tools">
     <img src="https://img.shields.io/badge/docs-latest-blue.svg?style=flat-square"
       alt="docs.rs docs" />
   </a>
@@ -27,15 +27,15 @@
 
 <div align="center">
   <h3>
-    <a href="https://docs.rs/openapi-wit">
+    <a href="https://docs.rs/wasm-http-tools">
       API Docs
     </a>
     <span> | </span>
-    <a href="https://github.com/yoshuawuyts/openapi-wit/releases">
+    <a href="https://github.com/yoshuawuyts/wasm-http-tools/releases">
       Releases
     </a>
     <span> | </span>
-    <a href="https://github.com/yoshuawuyts/openapi-wit/blob/master.github/CONTRIBUTING.md">
+    <a href="https://github.com/yoshuawuyts/wasm-http-tools/blob/master.github/CONTRIBUTING.md">
       Contributing
     </a>
   </h3>
@@ -65,6 +65,7 @@ protocol to communicate between those types automatically.
 | not yet started | [http-bindgen](./crates/http-bindgen/)         | Generate structured HTTP types from IETF specifications           |
 | in-progress     | [openapi-bindgen](./crates/openapi-bindgen/)   | Generate bidirectional bindings between OpenAPI (Swagger) and WIT |
 | not yet started | [wit-bindgen-http](./crates/wit-bindgen-http/) | Automatically route WIT imports/exports over HTTP                 |
+| not yet started | [wasm-http-tools](./crates/wasm-http-tools/)   | Rust tooling to use Wasm Components over HTTP                     |
 
 ## Contributing
 Want to join us? Check out our ["Contributing" guide][contributing] and take a
@@ -73,9 +74,9 @@ look at some of these issues:
 - [Issues labeled "good first issue"][good-first-issue]
 - [Issues labeled "help wanted"][help-wanted]
 
-[contributing]: https://github.com/yoshuawuyts/openapi-wit/blob/master.github/CONTRIBUTING.md
-[good-first-issue]: https://github.com/yoshuawuyts/openapi-wit/labels/good%20first%20issue
-[help-wanted]: https://github.com/yoshuawuyts/openapi-wit/labels/help%20wanted
+[contributing]: https://github.com/yoshuawuyts/wasm-http-tools/blob/master.github/CONTRIBUTING.md
+[good-first-issue]: https://github.com/yoshuawuyts/wasm-http-tools/labels/good%20first%20issue
+[help-wanted]: https://github.com/yoshuawuyts/wasm-http-tools/labels/help%20wanted
 
 ## License
 
