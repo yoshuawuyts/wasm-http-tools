@@ -1,7 +1,7 @@
 <h1 align="center">openapi-wit</h1>
 <div align="center">
   <strong>
-    Bidirectional bindings between OpenAPI (Swagger) and WIT
+    Rust tooling to use [Wasm Components](https://github.com/webassembly/component-model) over HTTP
   </strong>
 </div>
 
@@ -41,14 +41,30 @@
   </h3>
 </div>
 
-## Installation
-```sh
-$ cargo add openapi-wit
-```
+## Explainer
 
-## Safety
-This crate uses ``#![deny(unsafe_code)]`` to ensure everything is implemented in
-100% Safe Rust.
+This crate contains tools to enable Wasm Components to function over HTTP. This
+should make it possible to convert WIT definitions into working HTTP APIs with
+little effort.  Think: automatic SDK generation, and less [remote
+objects](https://en.wikipedia.org/wiki/Distributed_object). This means there
+will be some limitations: the only functions we'll be able to map over HTTP will
+be fallible, asynchronous functions. When executed remotely these functions 
+reflect the realities of networking. But when executed locally, the asynchronous
+fallible interface can always be optimized out.
+
+This project is a first attempt at defining what a bidirectional mapping of WIT
+and HTTP can look like. This is key to ensuring Wasm Components and WIT is not
+just restricted to intra-machine communication, but also inter-machine
+communication. If we have types on both sides, it should be able to generate the
+protocol to communicate between those types automatically.
+
+## Tools Included
+
+| Status          | Crate                                          | Description                                                       |
+| --------------- | ---------------------------------------------- | ----------------------------------------------------------------- |
+| not yet started | [http-bindgen](./crates/http-bindgen/)         | Generate structured HTTP types from IETF specifications           |
+| in-progress     | [openapi-bindgen](./crates/openapi-bindgen/)   | Generate bidirectional bindings between OpenAPI (Swagger) and WIT |
+| not yet started | [wit-bindgen-http](./crates/wit-bindgen-http/) | Automatically route WIT imports/exports over HTTP                 |
 
 ## Contributing
 Want to join us? Check out our ["Contributing" guide][contributing] and take a
