@@ -16,5 +16,8 @@ authors = [
 [features]
 
 [dependencies]
+openapiv3 = "2.0.0"
+serde = "1.0.195"
+serde_json = "1.0.111"
 
 [dev-dependencies]

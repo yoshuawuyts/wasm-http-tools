@@ -23,9 +23,9 @@
 
 ## Explainer
 
-This crate contains tools to enable Wasm Components to function over HTTP. This
+This crate contains tools to enable Wasm Components to be called over HTTP. This
 should make it possible to convert WIT definitions into working HTTP APIs with
-little effort.  Think: automatic SDK generation, and less [remote
+little effort. Think: automatic SDK generation, and less [remote
 objects](https://en.wikipedia.org/wiki/Distributed_object). This means there
 will be some limitations: the only functions we'll be able to map over HTTP will
 be fallible, asynchronous functions. When executed remotely these functions 
