@@ -1,6 +1,6 @@
 [workspace]
 members = [
-    "crates/http-bindgen",
+    "crates/wasi-http-client",
     "crates/openapi-bindgen",
     "crates/wit-bindgen-http",
     "crates/wasm-http-tools",

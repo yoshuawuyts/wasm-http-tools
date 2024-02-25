@@ -1,7 +1,7 @@
-<h1 align="center">http-bindgen</h1>
+<h1 align="center">wasi-http-client</h1>
 <div align="center">
   <strong>
-    HTTP types generator
+    WASI-based HTTP client library
   </strong>
 </div>
 
@@ -9,17 +9,17 @@
 
 <div align="center">
   <!-- Crates version -->
-  <a href="https://crates.io/crates/http-bindgen">
-    <img src="https://img.shields.io/crates/v/http-bindgen.svg?style=flat-square"
+  <a href="https://crates.io/crates/wasi-http-client">
+    <img src="https://img.shields.io/crates/v/wasi-http-client.svg?style=flat-square"
     alt="Crates.io version" />
   </a>
   <!-- Downloads -->
-  <a href="https://crates.io/crates/http-bindgen">
-    <img src="https://img.shields.io/crates/d/http-bindgen.svg?style=flat-square"
+  <a href="https://crates.io/crates/wasi-http-client">
+    <img src="https://img.shields.io/crates/d/wasi-http-client.svg?style=flat-square"
       alt="Download" />
   </a>
   <!-- docs.rs docs -->
-  <a href="https://docs.rs/http-bindgen">
+  <a href="https://docs.rs/wasi-http-client">
     <img src="https://img.shields.io/badge/docs-latest-blue.svg?style=flat-square"
       alt="docs.rs docs" />
   </a>
@@ -27,7 +27,7 @@
 
 <div align="center">
   <h3>
-    <a href="https://docs.rs/http-bindgen">
+    <a href="https://docs.rs/wasi-http-client">
       API Docs
     </a>
     <span> | </span>
@@ -43,7 +43,7 @@
 
 ## Installation
 ```sh
-$ cargo add http-bindgen
+$ cargo add wasi-http-client
 ```
 
 ## Safety
