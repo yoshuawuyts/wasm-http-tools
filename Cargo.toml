@@ -5,3 +5,4 @@ members = [
     "crates/wit-bindgen-http",
     "crates/wasm-http-tools",
 ]
+resolver = "2"

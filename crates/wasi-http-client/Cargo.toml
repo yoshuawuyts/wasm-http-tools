@@ -14,7 +14,7 @@ authors = ["Yoshua Wuyts <rust@yosh.is>"]
 [features]
 
 [dependencies]
-wasi = "0.12.1+wasi-0.2.0"
+wasi = "0.12.1"
 slab = "0.4.9"
 
 [dev-dependencies]

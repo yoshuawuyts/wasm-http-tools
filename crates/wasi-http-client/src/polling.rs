@@ -1,6 +1,6 @@
 //! This module handles the conversion from `Pollable` -> `Future`. We do this
 //! by creating an equivalent implementation to the `polling` crate. Once
-//! https://github.com/smol-rs/polling/issues/102 has been resolved, this module
+//! <https://github.com/smol-rs/polling/issues/102> has been resolved, this module
 //! will likely no longer be needed.
 
 use slab::Slab;
@@ -54,13 +54,13 @@ impl Poller {
     }
 
     /// Obtain the list of events which have been marked "ready" since the last
-    /// call to [`block_until`].
+    /// call to [`block_until`][Poller::block_until].
     pub fn ready_list(&mut self) -> &[EventKey] {
         &mut self.ready_list
     }
 
     /// Obtain the list of events which have been marked "ready" since hte last
-    /// call to [`block_until`].
+    /// call to [`block_until`][Poller::block_until].
     pub fn ready_list_mut(&mut self) -> &mut [EventKey] {
         &mut self.ready_list
     }
