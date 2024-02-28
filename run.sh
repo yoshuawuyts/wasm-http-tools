@@ -2,8 +2,10 @@
 
 set pipefail -euo
 
-cargo build --target wasm32-wasi --example main
-wasm-tools component new target/wasm32-wasi/debug/examples/main.wasm \
+EXAMPLE="pretty"
+
+cargo build --target wasm32-wasi --example $EXAMPLE
+wasm-tools component new target/wasm32-wasi/debug/examples/$EXAMPLE.wasm \
     --adapt resources/wasi_snapshot_preview1.command.wasm \
-    -o target/main.wasm
-wasmtime run -S http target/main.wasm
+    -o target/$EXAMPLE.wasm
+wasmtime run -S http target/$EXAMPLE.wasm

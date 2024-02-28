@@ -34,6 +34,11 @@ impl Poller {
         EventKey(key as u32)
     }
 
+    /// Get a `Pollable` if it exists.
+    pub fn get(&self, key: &EventKey) -> Option<&Pollable> {
+        self.targets.get(key.0 as usize)
+    }
+
     /// Remove an instance of `Pollable` from `Poller`.
     ///
     /// Returns `None` if no entry was found for `key`.

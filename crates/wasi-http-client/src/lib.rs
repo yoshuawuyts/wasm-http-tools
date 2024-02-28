@@ -10,4 +10,6 @@
 #![deny(missing_debug_implementations, nonstandard_style)]
 #![warn(missing_docs, future_incompatible, unreachable_pub)]
 
+mod client;
 pub mod runtime;
+pub use client::*;

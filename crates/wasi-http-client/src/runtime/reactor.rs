@@ -1,9 +1,10 @@
 use super::polling::{EventKey, Poller};
+use std::task::Poll;
 use std::{cell::RefCell, rc::Rc};
 use wasi::io::poll::Pollable;
 
 /// An async executor, converting from WASI poll instances to
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Reactor {
     poller: Rc<RefCell<Poller>>,
 }
@@ -21,13 +22,18 @@ impl Reactor {
         self.poller.borrow_mut().block_until();
     }
 
-    /// Register interest in a `Pollable``.
-    pub fn register(&self, pollable: Pollable) -> EventKey {
-        self.poller.borrow_mut().insert(pollable)
-    }
-
-    /// Deregister interest in a `Pollable`
-    pub fn deregister(&self, key: EventKey) {
+    /// Wait for the pollable to resolve
+    pub async fn wait_for(&self, pollable: Pollable) {
+        let key = self.poller.borrow_mut().insert(pollable);
+        std::future::poll_fn(|_cx| -> Poll<()> {
+            let poller = self.poller.borrow();
+            let pollable = poller.get(&key).unwrap();
+            match pollable.ready() {
+                true => Poll::Ready(()),
+                false => Poll::Pending,
+            }
+        })
+        .await;
         self.poller.borrow_mut().remove(key);
     }
 }

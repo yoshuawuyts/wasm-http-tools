@@ -27,14 +27,14 @@ impl Runtime {
     /// Start the event loop
     pub fn run<F, Fut>(self, f: F) -> Fut::Output
     where
-        F: FnOnce(&Reactor) -> Fut,
+        F: FnOnce(Reactor) -> Fut,
         Fut: Future,
     {
         // Construct the reactor
         let reactor = Reactor::new();
 
         // Create the future and pin it so it can be polled
-        let fut = (f)(&reactor);
+        let fut = (f)(reactor.clone());
         let mut fut = pin!(fut);
 
         // Create a new context to be passed to the future.

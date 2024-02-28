@@ -15,13 +15,15 @@ fn main() {
     req.set_scheme(Some(&Scheme::Https)).unwrap();
     req.set_path_with_query(Some("/")).unwrap();
     req.set_authority(Some("example.com")).unwrap();
-    let res = handle(req, None).unwrap();
 
-    // Wait for the request headers to complete
+    // Send the request and wait for it to complete
+    let res = handle(req, None).unwrap();
     let pollable = res.subscribe();
     let key = poller.insert(pollable);
     poller.block_until();
     poller.remove(key);
+
+    // Parse the response headers to find the length of the body
     let res = res.get().unwrap().unwrap().unwrap();
     let headers = res.headers().entries();
     let (_, content_length) = headers
@@ -33,7 +35,7 @@ fn main() {
         .parse::<u64>()
         .unwrap();
 
-    // Wait for request body to complete
+    // Receive the request body
     // TODO: read smaller chunks than `content_length` at the same time
     let body = res.consume().unwrap();
     let body = body.stream().unwrap();
@@ -41,6 +43,8 @@ fn main() {
     let key = poller.insert(pollable);
     poller.block_until();
     poller.remove(key);
+
+    // Parse the request body into a string and print it
     let bytes = body.read(content_length).unwrap();
     dbg!(String::from_utf8(bytes).unwrap());
 }
