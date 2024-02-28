@@ -1,4 +1,5 @@
-#!bash
+#!/usr/bin/env bash
+
 set pipefail -euo
 
 cargo build --target wasm32-wasi --example main
