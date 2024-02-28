@@ -2,7 +2,7 @@ use wasi::http::{
     outgoing_handler::{handle, OutgoingRequest},
     types::{Fields, Method, Scheme},
 };
-use wasi_http_client::Poller;
+use wasi_http_client::runtime::Poller;
 
 fn main() {
     // Construct the runtime
