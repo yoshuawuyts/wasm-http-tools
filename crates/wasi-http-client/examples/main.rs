@@ -1,5 +1,5 @@
 use wasi_http_client::runtime::Runtime;
-use wasi_http_client::{Client, Method, Request, Url};
+use wasi_http_client::{Client, Method, Request};
 
 fn main() {
     Runtime::new().run(|reactor| async {
