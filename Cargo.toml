@@ -12,4 +12,4 @@ resolver = "2"
 wasi = "0.12.1"
 slab = "0.4.9"
 url = "2.5.0"
-wasi-async-runtime = { version = "0.1.0", path = "crates/wasi-async-runtime" }
+wasi-async-runtime = { version = "0.1.1", path = "crates/wasi-async-runtime" }
