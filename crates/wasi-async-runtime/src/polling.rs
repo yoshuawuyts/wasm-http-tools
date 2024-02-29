@@ -61,6 +61,12 @@ impl Poller {
             targets.push(target);
         }
 
+        debug_assert_ne!(
+            targets.len(),
+            0,
+            "Attempting to block on an empty list of pollables - without any pending work, no progress can be made and the program may spin indefinitely"
+        );
+
         // Now that we have that association, we're ready to poll our targets.
         // This will block until an event has completed.
         let ready_indexes = poll(&targets);
