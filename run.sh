@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-EXAMPLE="$1"
+EXAMPLE="main"
 WASMTIME_BACKTRACE_DETAILS=1
 
 cargo build --target wasm32-wasi --example $EXAMPLE
