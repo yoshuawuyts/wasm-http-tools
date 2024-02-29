@@ -6,20 +6,27 @@ fn main() {
     block_on(|reactor| async {
         let client = Client::new(reactor);
 
-        let url = "https://example.com".parse().unwrap();
-        let req1 = Request::new(Method::Get, url);
+        let a = async {
+            let url = "https://example.com".parse().unwrap();
+            let req = Request::new(Method::Get, url);
+            let res = client.send(req).await;
 
-        let url = "https://example.com".parse().unwrap();
-        let req2 = Request::new(Method::Get, url);
+            let body = read_to_end(res).await;
+            let body = String::from_utf8(body).unwrap();
+            println!("{body}");
+        };
 
-        let (res1, res2) = (client.send(req1), client.send(req2)).join().await;
-        let (body1, body2) = (read_to_end(res1), read_to_end(res2)).join().await;
+        let b = async {
+            let url = "https://example.com".parse().unwrap();
+            let req = Request::new(Method::Get, url);
+            let res = client.send(req).await;
 
-        let body1 = String::from_utf8(body1).unwrap();
-        println!("{body1}");
+            let body = read_to_end(res).await;
+            let body = String::from_utf8(body).unwrap();
+            println!("{body}");
+        };
 
-        let body2 = String::from_utf8(body2).unwrap();
-        println!("{body2}");
+        (a, b).join().await;
     })
 }
 
