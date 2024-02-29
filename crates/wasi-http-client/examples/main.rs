@@ -1,8 +1,8 @@
-use wasi_http_client::runtime::Runtime;
+use wasi_http_client::runtime::block_on;
 use wasi_http_client::{Client, Method, Request};
 
 fn main() {
-    Runtime::new().run(|reactor| async {
+    block_on(|reactor| async {
         let client = Client::new(reactor);
         let url = "https://example.com".parse().unwrap();
         let req = Request::new(Method::Get, url);
