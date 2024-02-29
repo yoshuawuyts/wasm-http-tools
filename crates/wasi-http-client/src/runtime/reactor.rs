@@ -1,4 +1,4 @@
-use super::polling::{EventKey, Poller};
+use super::polling::Poller;
 use std::task::Poll;
 use std::{cell::RefCell, rc::Rc};
 use wasi::io::poll::Pollable;
