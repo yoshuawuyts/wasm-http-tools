@@ -19,3 +19,4 @@ slab = "0.4.9"
 url = "2.5.0"
 
 [dev-dependencies]
+futures-concurrency = "7.4.0"

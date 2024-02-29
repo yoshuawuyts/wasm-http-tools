@@ -46,7 +46,18 @@ impl Reactor {
     pub(crate) fn block_until(&self) {
         let mut reactor = self.inner.borrow_mut();
         for key in reactor.poller.block_until() {
-            reactor.wakers[&key].wake_by_ref();
+            match reactor.wakers.get(&key) {
+                Some(waker) => waker.wake_by_ref(),
+                None => {
+                    let current_keys: Vec<EventKey> = reactor
+                        .poller
+                        .targets
+                        .iter()
+                        .map(|(key, _)| EventKey(key as u32))
+                        .collect();
+                    panic!("tried to wake the waker for `{key:?}`, but only the keys `{current_keys:?}` are currently present in the poll set")
+                }
+            }
         }
     }
 
