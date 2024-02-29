@@ -1,10 +1,10 @@
 use super::Reactor;
 
+use core::future::Future;
 use core::pin::pin;
-use std::future::Future;
-use std::ptr;
-use std::task::Waker;
-use std::task::{Context, Poll, RawWaker, RawWakerVTable};
+use core::ptr;
+use core::task::Waker;
+use core::task::{Context, Poll, RawWaker, RawWakerVTable};
 
 /// Start the event loop
 pub fn block_on<F, Fut>(f: F) -> Fut::Output

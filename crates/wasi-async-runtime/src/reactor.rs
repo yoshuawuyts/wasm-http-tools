@@ -1,9 +1,14 @@
 use super::polling::{EventKey, Poller};
 
+use alloc::rc::Rc;
+use alloc::vec::Vec;
+use core::cell::RefCell;
+use core::task::Poll;
+use core::task::Waker;
+#[cfg(not(feature = "std"))]
+use hashbrown::HashMap;
+#[cfg(feature = "std")]
 use std::collections::HashMap;
-use std::task::Poll;
-use std::task::Waker;
-use std::{cell::RefCell, rc::Rc};
 use wasi::io::poll::Pollable;
 
 /// Manage async system resources for WASI 0.2
@@ -67,7 +72,7 @@ impl Reactor {
         let key = reactor.poller.insert(pollable);
         drop(reactor); // NOTE: makes sure we don't hold the lock across the .await
 
-        std::future::poll_fn(|cx| -> Poll<()> {
+        core::future::poll_fn(|cx| -> Poll<()> {
             let mut reactor = self.inner.borrow_mut();
             let waker = cx.waker();
             reactor.wakers.insert(key, waker.clone());

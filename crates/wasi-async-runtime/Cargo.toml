@@ -12,11 +12,13 @@ categories = []
 authors = ["Yoshua Wuyts <rust@yosh.is>"]
 
 [features]
+default = ["std"]
+std = []
 
 [dependencies]
 wasi = "0.12.1"
-slab = "0.4.9"
-url = "2.5.0"
+slab = { version = "0.4.9", default-features = false }
+hashbrown = "0.14.3"
 
 [dev-dependencies]
 futures-concurrency = "7.4.0"

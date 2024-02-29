@@ -3,6 +3,7 @@
 //! <https://github.com/smol-rs/polling/issues/102> has been resolved, this module
 //! will likely no longer be needed.
 
+use alloc::vec::Vec;
 use slab::Slab;
 use wasi::io::poll::{poll, Pollable};
 
