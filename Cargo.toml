@@ -4,5 +4,12 @@ members = [
     "crates/openapi-bindgen",
     "crates/wit-bindgen-http",
     "crates/wasm-http-tools",
+    "crates/wasi-async-runtime",
 ]
 resolver = "2"
+
+[workspace.dependencies]
+wasi = "0.12.1"
+slab = "0.4.9"
+url = "2.5.0"
+wasi-async-runtime = { version = "0.1.0", path = "crates/wasi-async-runtime" }

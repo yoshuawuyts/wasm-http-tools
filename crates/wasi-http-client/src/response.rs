@@ -1,8 +1,8 @@
-use crate::runtime::Reactor;
 use wasi::{
     http::types::{IncomingBody, IncomingResponse},
     io::streams::{InputStream, StreamError},
 };
+use wasi_async_runtime::Reactor;
 
 /// Stream 2kb chunks at a time
 const CHUNK_SIZE: u64 = 2048;

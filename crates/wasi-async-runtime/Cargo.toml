@@ -1,10 +1,10 @@
 [package]
-name = "wasi-http-client"
-version = "0.0.0"
+name = "wasi-async-runtime"
+version = "0.1.0"
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/yoshuawuyts/wasm-http-tools"
 documentation = "https://docs.rs/wit-bindgen-http"
-description = "WASI-based HTTP client library"
+description = "WASI-based async runtime library for Rust"
 readme = "README.md"
 edition = "2021"
 keywords = []
@@ -17,7 +17,6 @@ authors = ["Yoshua Wuyts <rust@yosh.is>"]
 wasi = "0.12.1"
 slab = "0.4.9"
 url = "2.5.0"
-wasi-async-runtime = { workspace = true }
 
 [dev-dependencies]
 futures-concurrency = "7.4.0"

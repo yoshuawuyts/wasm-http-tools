@@ -1,5 +1,5 @@
 use futures_concurrency::prelude::*;
-use wasi_http_client::runtime::block_on;
+use wasi_async_runtime::block_on;
 use wasi_http_client::{Client, Method, Request, Response};
 
 fn main() {
