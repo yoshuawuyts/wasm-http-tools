@@ -4,7 +4,7 @@ use wasi_http_client::{Client, Method, Request, Url};
 fn main() {
     Runtime::new().run(|reactor| async {
         let client = Client::new(reactor);
-        let url: Url = "https://example.com".parse().unwrap();
+        let url = "https://example.com".parse().unwrap();
         let req = Request::new(Method::Get, url);
         let mut res = client.send(req).await;
 
