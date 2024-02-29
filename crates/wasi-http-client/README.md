@@ -47,8 +47,8 @@ $ cargo add wasi-http-client
 ```
 
 ## Safety
-This crate uses ``#![deny(unsafe_code)]`` to ensure everything is implemented in
-100% Safe Rust.
+This crate a small amount of `unsafe` code; all annotated using `UNSAFE`
+comments explaining their uses.
 
 ## Contributing
 Want to join us? Check out our ["Contributing" guide][contributing] and take a

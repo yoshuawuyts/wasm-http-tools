@@ -11,7 +11,6 @@ use wasi::io::poll::{poll, Pollable};
 #[derive(Debug)]
 pub(crate) struct Poller {
     targets: Slab<Pollable>,
-    ready_list: Vec<EventKey>,
 }
 
 impl Poller {
@@ -24,7 +23,6 @@ impl Poller {
     pub(crate) fn with_capacity(capacity: usize) -> Self {
         Self {
             targets: Slab::with_capacity(capacity),
-            ready_list: Vec::with_capacity(capacity),
         }
     }
 
@@ -49,17 +47,17 @@ impl Poller {
     /// Block the current thread until a new event has triggered.
     ///
     /// This will clear the value of `ready_list`.
-    pub(crate) fn block_until(&mut self) {
+    pub(crate) fn block_until(&mut self) -> Vec<EventKey> {
         let targets: Vec<_> = self.targets.iter().map(|(_, target)| target).collect();
         let ready_list = poll(&targets);
 
         // SAFETY: Transmute from a `Vec<u32>` to a `Vec<EventKey>`. This is
         // safe because `EventKey` is `#[repr(transparent)]` for `u32`.
-        self.ready_list = unsafe { mem::transmute(ready_list) };
+        unsafe { mem::transmute(ready_list) }
     }
 }
 
 /// A key representing the
 #[repr(transparent)]
-#[derive(Debug, PartialEq, Eq, PartialOrd, Ord)]
+#[derive(Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Clone, Copy)]
 pub(crate) struct EventKey(u32);
