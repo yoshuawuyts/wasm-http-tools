@@ -6,12 +6,14 @@ use std::task::Waker;
 use std::{cell::RefCell, rc::Rc};
 use wasi::io::poll::Pollable;
 
-/// An async executor, converting from WASI poll instances to
+/// Manage async system resources for WASI 0.1
 #[derive(Debug, Clone)]
 pub struct Reactor {
     inner: Rc<RefCell<InnerReactor>>,
 }
 
+/// The private, internal `Reactor` implementation - factored out so we can take
+/// a lock of the whole.
 #[derive(Debug)]
 struct InnerReactor {
     poller: Poller,
