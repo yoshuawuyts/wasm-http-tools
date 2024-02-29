@@ -6,7 +6,7 @@ use std::task::Waker;
 use std::{cell::RefCell, rc::Rc};
 use wasi::io::poll::Pollable;
 
-/// Manage async system resources for WASI 0.1
+/// Manage async system resources for WASI 0.2
 #[derive(Debug, Clone)]
 pub struct Reactor {
     inner: Rc<RefCell<InnerReactor>>,

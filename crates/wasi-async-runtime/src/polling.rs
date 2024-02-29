@@ -75,7 +75,7 @@ impl Poller {
     }
 }
 
-/// A key representing the
+/// A key representing an entry into the poller
 #[repr(transparent)]
 #[derive(Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Clone, Copy)]
 pub(crate) struct EventKey(pub(crate) u32);
