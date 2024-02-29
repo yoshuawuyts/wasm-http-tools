@@ -29,9 +29,19 @@ impl Reactor {
         }
     }
 
-    /// Block until new events are ready.
+    /// Block until new events are ready. Calls the respective wakers once done.
+    ///
+    /// # On Wakers and single-threaded runtimes
+    ///
+    /// At first glance it might seem silly that this goes through the motions
+    /// of calling the wakers. The main waker we create here is a `noop` waker:
+    /// it does nothing. However, it is common and encouraged to use wakers to
+    /// distinguish between events. Concurrency primitives may construct their
+    /// own wakers to keep track of identity and wake more precisely. We do not
+    /// control the wakers construted by other libraries, and it is for this
+    /// reason that we have to call all the wakers - even if by default they
+    /// will do nothing.
     pub(crate) fn block_until(&self) {
-        dbg!();
         let mut reactor = self.inner.borrow_mut();
         for key in reactor.poller.block_until() {
             reactor.wakers[&key].wake_by_ref();
@@ -42,7 +52,7 @@ impl Reactor {
     pub async fn wait_for(&self, pollable: Pollable) {
         let mut reactor = self.inner.borrow_mut();
         let key = reactor.poller.insert(pollable);
-        drop(reactor); // NOTE: make sure we don't hold the lock across the .await
+        drop(reactor); // NOTE: makes sure we don't hold the lock across the .await
 
         std::future::poll_fn(|cx| -> Poll<()> {
             let mut reactor = self.inner.borrow_mut();
