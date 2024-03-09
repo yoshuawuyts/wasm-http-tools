@@ -1,17 +1,18 @@
 use wasi_async_runtime::block_on;
-use wasi_http_client::{Client, Method, Request, Response};
+use wasi_http_client::{Client, Method, Request, Response, Result};
 
-fn main() {
+fn main() -> Result<()> {
     block_on(|reactor| async {
         let client = Client::new(reactor);
 
         let url = "https://example.com".parse().unwrap();
         let req = Request::new(Method::Get, url);
-        let res = client.send(req).await;
+        let res = client.send(req).await?;
 
         let body = read_to_end(res).await;
         let body = String::from_utf8(body).unwrap();
         println!("{body}");
+        Ok(())
     })
 }
 

@@ -21,6 +21,12 @@ mod method;
 mod request;
 mod response;
 
+/// The `wasi-http-client` error type.
+pub type Error = wasi::http::types::ErrorCode;
+
+/// The `wasi-http-client` result type.
+pub type Result<T> = std::result::Result<T, Error>;
+
 /// An HTTP client.
 #[derive(Debug)]
 pub struct Client {
@@ -34,13 +40,15 @@ impl Client {
     }
 
     /// Send an HTTP request.
-    pub async fn send(&self, req: Request) -> Response {
+    pub async fn send(&self, req: Request) -> Result<Response> {
         let wasi_req = req.into();
         let res = wasi::http::outgoing_handler::handle(wasi_req, None).unwrap();
         self.reactor.wait_for(res.subscribe()).await;
 
-        // TODO: handle errors without panicking
-        let res = res.get().unwrap().unwrap().unwrap();
-        Response::from_incoming(res, self.reactor.clone())
+        // NOTE: the first `unwrap` is to ensure readiness, the second `unwrap`
+        // is to trap if we try and get the response more than once. The final
+        // `?` is go raise the actual error if there is one.
+        let res = res.get().unwrap().unwrap()?;
+        Ok(Response::from_incoming(res, self.reactor.clone()))
     }
 }
