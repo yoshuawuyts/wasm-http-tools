@@ -4,6 +4,8 @@ use wasi::{
 };
 use wasi_async_runtime::Reactor;
 
+use crate::Headers;
+
 /// Stream 2kb chunks at a time
 const CHUNK_SIZE: u64 = 2048;
 
@@ -12,7 +14,7 @@ const CHUNK_SIZE: u64 = 2048;
 pub struct Response {
     bytes_read: u64,
     content_length: u64,
-    headers: Vec<(String, Vec<u8>)>,
+    headers: Headers,
     reactor: Reactor,
 
     // IMPORTANT: the order of these fields here matters. `incoming_body` must
@@ -22,13 +24,20 @@ pub struct Response {
 }
 
 impl Response {
-    pub(crate) fn from_incoming(incoming: IncomingResponse, reactor: Reactor) -> Self {
-        let headers = incoming.headers().entries();
+    pub(crate) fn try_from_incoming(
+        incoming: IncomingResponse,
+        reactor: Reactor,
+    ) -> crate::Result<Self> {
+        let headers: Headers = incoming.headers().into();
 
         let (_, content_length) = headers
+            .0
             .iter()
             .find(|(k, _)| k.to_lowercase() == "content-length")
             .expect("no content-length found; violates HTTP/1.1");
+        let content_length = content_length
+            .get(0)
+            .expect("no value found for content-length; violates HTTP/1.1");
         let content_length = String::from_utf8(content_length.clone())
             .unwrap()
             .parse::<u64>()
@@ -43,14 +52,14 @@ impl Response {
             .stream()
             .expect("cannot call `stream` twice on an incoming body");
 
-        Self {
+        Ok(Self {
             bytes_read: 0,
             headers,
             content_length,
             body_stream,
             _incoming_body: incoming_body,
             reactor,
-        }
+        })
     }
 
     // pub async fn read_to_end(self) -> Result<Vec<u8>, StreamError> {
@@ -82,7 +91,12 @@ impl Response {
     }
 
     /// Get the HTTP headers from the impl
-    pub fn headers(&self) -> &[(String, Vec<u8>)] {
+    pub fn headers(&self) -> &Headers {
         &self.headers
+    }
+
+    /// Mutably get the HTTP headers from the impl
+    pub fn headers_mut(&mut self) -> &mut Headers {
+        &mut self.headers
     }
 }

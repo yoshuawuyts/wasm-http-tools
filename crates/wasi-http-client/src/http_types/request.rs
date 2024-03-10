@@ -8,9 +8,9 @@ use wasi::http::{
 /// An HTTP request
 #[derive(Debug)]
 pub struct Request {
-    headers: WasiHeaders,
     method: Method,
     url: Url,
+    headers: WasiHeaders,
 }
 
 impl Request {

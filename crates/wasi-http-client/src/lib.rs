@@ -10,22 +10,14 @@
 #![deny(missing_debug_implementations, nonstandard_style)]
 #![warn(missing_docs, future_incompatible, unreachable_pub)]
 
-pub use method::Method;
-pub use request::Request;
-pub use response::Response;
+pub use http_types::{
+    Error, FieldName, FieldValue, Fields, Headers, Method, Request, Response, Result, Trailers,
+};
 pub use url::Url;
 
 use wasi_async_runtime::Reactor;
 
-mod method;
-mod request;
-mod response;
-
-/// The `wasi-http-client` error type.
-pub type Error = wasi::http::types::ErrorCode;
-
-/// The `wasi-http-client` result type.
-pub type Result<T> = std::result::Result<T, Error>;
+mod http_types;
 
 /// An HTTP client.
 #[derive(Debug)]
@@ -49,6 +41,6 @@ impl Client {
         // is to trap if we try and get the response more than once. The final
         // `?` is go raise the actual error if there is one.
         let res = res.get().unwrap().unwrap()?;
-        Ok(Response::from_incoming(res, self.reactor.clone()))
+        Ok(Response::try_from_incoming(res, self.reactor.clone())?)
     }
 }
