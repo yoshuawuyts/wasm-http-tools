@@ -2,6 +2,7 @@ use wasi::http::types::Method as WasiMethod;
 
 /// The method for the HTTP request
 #[derive(Debug)]
+#[non_exhaustive]
 pub enum Method {
     /// The GET method requests transfer of a current selected representation
     /// for the target resource.

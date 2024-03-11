@@ -6,6 +6,7 @@
 #[derive(Debug)]
 #[repr(u16)]
 #[allow(missing_docs)]
+#[non_exhaustive]
 pub enum StatusCode {
     Continue = 100,
     SwitchingProtocols = 101,
