@@ -11,7 +11,8 @@
 #![warn(missing_docs, future_incompatible, unreachable_pub)]
 
 pub use http_types::{
-    Error, FieldName, FieldValue, Fields, Headers, Method, Request, Response, Result, Trailers,
+    Error, FieldName, FieldValue, Fields, Headers, Method, Request, Response, Result, StatusCode,
+    Trailers,
 };
 pub use url::Url;
 
