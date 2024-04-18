@@ -42,7 +42,7 @@ protocol to communicate between those types automatically.
 
 | Status          | Crate                                          | Description                                                       |
 | --------------- | ---------------------------------------------- | ----------------------------------------------------------------- |
-| not yet started | [wasi-http-client](./crates/wasi-http-client/)         | Generate structured HTTP types from IETF specifications           |
+| not yet started | [wasi-http-client](./crates/wasi-http-client/) | Generate structured HTTP types from IETF specifications           |
 | in-progress     | [openapi-bindgen](./crates/openapi-bindgen/)   | Generate bidirectional bindings between OpenAPI (Swagger) and WIT |
 | not yet started | [wasm-http-tools](./crates/wasm-http-tools/)   | Rust tooling to use Wasm Components over HTTP                     |
 | not yet started | [wit-bindgen-http](./crates/wit-bindgen-http/) | Automatically generate HTTP routing layers for WIT definitions    |
@@ -71,3 +71,23 @@ Unless you explicitly state otherwise, any contribution intentionally submitted
 for inclusion in this crate by you, as defined in the Apache-2.0 license with LLVM-exception,
 shall be licensed as above, without any additional terms or conditions.
 </sub>
+
+| effect name | context    | lowering   | terminate  | forward  |
+| ----------- | ---------- | ---------- | ---------- | -------- |
+| fallibility | `try {}`   | `Try`      | `match`    | `?`      |
+| asynchrony  | `async {}` | `Future`   | `block_on` | `.await` |
+| iteration   | `gen {}`   | `Iterator` | `for..in`  | *n/a*    |
+
+> Filling in the [schedule from the MCP](https://github.com/rust-lang/compiler-team/issues/695) gives:
+ 
+ | date	Rust Stable	Rust Beta	Rust Nightly	Notes
+ | -----------| ----| ----| ---| ---|
+ | 2024-02-08	| 1.76	|         1.77	|         1.78	|         add support for `wasm32-wasi-preview1` (1, 2) |
+ | 2024-03-21	| 1.77	|         1.78	|         1.79	|
+ | 2024-05-02	| 1.78	|         1.79	|         1.80	|
+ | 2024-06-13	| 1.79	|         1.80	|         1.81	|         warn on `wasm32-wasi` (4)
+ | 2024-07-25	| 1.80	|         1.81	|         1.82	|
+ | 2024-09-05	| 1.81	|         1.82	|         1.83	|
+ | 2024-10-17	| 1.82	|         1.83	|         1.84	|         remove `wasm32-wasi` (5)
+ | 2024-11-28	| 1.83	|         1.84	|         1.85	|
+ | 2025-01-09	| 1.84	|         1.85	|         1.86	|         `wasm32-wasi` is now gone on all release channels
