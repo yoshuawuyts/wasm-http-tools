@@ -4,8 +4,6 @@
 #![deny(missing_debug_implementations, nonstandard_style)]
 #![recursion_limit = "512"]
 
-extern crate proc_macro;
-
 use proc_macro::TokenStream;
 use quote::{quote, quote_spanned};
 use syn::spanned::Spanned;
@@ -14,62 +12,64 @@ use syn::spanned::Spanned;
 pub fn main(_attr: TokenStream, item: TokenStream) -> TokenStream {
     let input = syn::parse_macro_input!(item as syn::ItemFn);
 
-    let ret = &input.sig.output;
+    let is_async = input.sig.asyncness.is_some();
     let name = &input.sig.ident;
     let body = &input.block;
-    let asyncness = &input.sig.asyncness;
-    let attrs = &input.attrs;
 
     if name != "main" {
         let tokens = quote_spanned! { name.span() =>
-            compile_error!("only fn main can be tagged with #[wasi_http_attributes::main]");
+            compile_error!("only fn main can be tagged with #[wasi_http_server::main]");
         };
         return TokenStream::from(tokens);
     }
 
-    let end = match ret {
-        syn::ReturnType::Default => quote! {.unwrap()},
-        _ => quote! {?},
-    };
+    if !is_async {
+        let tokens = quote_spanned! { name.span() =>
+            compile_error!("fn main must be `async fn main`");
+        };
+        return TokenStream::from(tokens);
+    }
 
     let inputs = &input.sig.inputs;
     let result = match inputs.len() {
-        0 => {
-            quote! {
-                #(#attrs)*
-                #asyncness fn main() #ret {
-                    #body
-                }
-            }
-        }
-        1 => {
-            let arg = match inputs.first().unwrap() {
-                syn::FnArg::Typed(arg) => arg,
-                _ => {
-                    let tokens = quote_spanned! { inputs.span() =>
-                        compile_error!("fn main should take a fully formed argument");
-                    };
-                    return TokenStream::from(tokens);
-                }
-            };
-            let arg_name = &arg.pat;
-            let arg_type = &arg.ty;
-            quote! {
-                #(#attrs)*
-                #asyncness fn main() #ret {
-                    let #arg_name = <#arg_type as wasi_http_attributes::ParseArgs>::parse_args()#end;
-                    #body
-                }
+        3 => {
+            let (_reactor, _reactor_ty) = arg_to_string(&inputs[0]);
+            let (_req, _req_ty) = arg_to_string(&inputs[1]);
+            let (_res, _res_ty) = arg_to_string(&inputs[2]);
 
+            quote! {
+                struct _Component;
+
+                ::wasi::http::proxy::export!(_Component);
+
+                impl wasi::exports::http::incoming_handler::Guest for _Component {
+                    fn handle(#_req: #_req_ty, #_res: #_res_ty) {
+                        wasi_async_runtime::block_on(|#_reactor: #_reactor_ty| async move {
+                            #body
+                        })
+                    }
+                }
             }
         }
         _ => {
             let tokens = quote_spanned! { inputs.span() =>
-                compile_error!("fn main can take 0 or 1 arguments");
+                compile_error!("fn main should take 3 arguments");
             };
             return TokenStream::from(tokens);
         }
     };
 
     result.into()
+}
+
+fn arg_to_string(arg: &syn::FnArg) -> (syn::Ident, syn::Type) {
+    let pat = match arg {
+        syn::FnArg::Typed(pat) => pat,
+        _ => panic!("expected an ident as an arg to `fn main`"),
+    };
+    let ident = match &*pat.pat {
+        syn::Pat::Ident(ident) => ident.ident.clone(),
+        _ => panic!("expected an ident as an arg to `fn main`"),
+    };
+    (ident, *pat.ty.clone())
 }

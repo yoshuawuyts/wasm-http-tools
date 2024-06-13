@@ -5,6 +5,7 @@ members = [
     "crates/wit-bindgen-http",
     "crates/wasm-http-tools",
     "crates/wasi-async-runtime",
+    "crates/wasi-http-attributes",
 ]
 resolver = "2"
 
