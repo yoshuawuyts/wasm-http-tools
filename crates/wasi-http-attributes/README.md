@@ -1,6 +1,6 @@
 # wasi-http-attributes
-Proc macro attributes for the [Paw](https://github.com/yoshuawuyts/wasm-http-tools) crate. See the
-[Paw](https://docs.rs/paw) documentation for more details.
+
+Proc macro attributes for the `wasi-http` crate.
 
 ## Installation
 

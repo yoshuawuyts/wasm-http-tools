@@ -62,17 +62,21 @@ impl Response {
         })
     }
 
-    // pub async fn read_to_end(self) -> Result<Vec<u8>, StreamError> {
-    //     // Wait for an event to be ready
-    //     self.reactor.wait_for(self.body_stream.subscribe()).await;
+    /// Get the HTTP headers from the impl
+    pub fn headers(&self) -> &Headers {
+        &self.headers
+    }
 
-    //     // Read the bytes from the body stream
-    //     let buf = self.body_stream.read(self.content_length);
-    //     buf
-    // }
+    /// Mutably get the HTTP headers from the impl
+    pub fn headers_mut(&mut self) -> &mut Headers {
+        &mut self.headers
+    }
+}
 
-    /// Get the next chunk from the HTTP body stream.
-    pub async fn next_chunk(&mut self) -> Option<Result<Vec<u8>, StreamError>> {
+impl async_iterator::Iterator for Response {
+    type Item = Result<Vec<u8>, StreamError>;
+
+    async fn next(&mut self) -> Option<Self::Item> {
         // Calculate how many bytes we can read
         let remaining = self.content_length - self.bytes_read;
         let len = remaining.min(CHUNK_SIZE);
@@ -88,15 +92,5 @@ impl Response {
         let buf = self.body_stream.read(len);
         self.bytes_read += len;
         Some(buf)
-    }
-
-    /// Get the HTTP headers from the impl
-    pub fn headers(&self) -> &Headers {
-        &self.headers
-    }
-
-    /// Mutably get the HTTP headers from the impl
-    pub fn headers_mut(&mut self) -> &mut Headers {
-        &mut self.headers
     }
 }

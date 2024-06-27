@@ -40,13 +40,14 @@ protocol to communicate between those types automatically.
 
 ## Tools Included
 
-| Status          | Crate                                              | Description                                                       |
-| --------------- | -------------------------------------------------- | ----------------------------------------------------------------- |
-| complete        | [wasi-async-runtime](./crates/wasi-async-runtime/) | WASI-based async runtime library for Rust                         |
-| in-progress     | [openapi-bindgen](./crates/openapi-bindgen/)       | Generate bidirectional bindings between OpenAPI (Swagger) and WIT |
-| in-progress     | [wasi-http-client](./crates/wasi-http-client/)     | WASI-based HTTP client library for Rust                           |
-| not yet started | [wasm-http-tools](./crates/wasm-http-tools/)       | Rust tooling to use Wasm Components over HTTP                     |
-| not yet started | [wit-bindgen-http](./crates/wit-bindgen-http/)     | Automatically generate HTTP routing layers for WIT definitions    |
+| Status          | Crate                                                  | Description                                                       |
+| --------------- | ------------------------------------------------------ | ----------------------------------------------------------------- |
+| complete        | [wasi-async-runtime](./crates/wasi-async-runtime/)     | WASI-based async runtime library for Rust                         |
+| complete        | [wasi-http-attributes](./crates/wasi-http-attributes/) | Proc macros for WASI HTTP                                         |
+| in-progress     | [openapi-bindgen](./crates/openapi-bindgen/)           | Generate bidirectional bindings between OpenAPI (Swagger) and WIT |
+| in-progress     | [wasi-http-client](./crates/wasi-http-client/)         | WASI-based HTTP client library for Rust                           |
+| not yet started | [wasm-http-tools](./crates/wasm-http-tools/)           | Rust tooling to use Wasm Components over HTTP                     |
+| not yet started | [wit-bindgen-http](./crates/wit-bindgen-http/)         | Automatically generate HTTP routing layers for WIT definitions    |
 
 ## Contributing
 Want to join us? Check out our ["Contributing" guide][contributing] and take a

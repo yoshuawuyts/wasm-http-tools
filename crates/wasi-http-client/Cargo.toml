@@ -18,6 +18,7 @@ wasi = "0.12.1"
 slab = "0.4.9"
 url = "2.5.0"
 wasi-async-runtime = { workspace = true }
+async-iterator = "2.3.0"
 
 [dev-dependencies]
 futures-concurrency = "7.4.0"
